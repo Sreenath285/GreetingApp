@@ -57,4 +57,9 @@ public class GreetingRestController {
     public List<Greeting> getAllGreetings() {
         return iGreetingService.getAllGreetings();
     }
+
+    @PutMapping("/editGreeting")
+    public Greeting updateGreeting(@RequestBody Greeting greeting) {
+        return iGreetingService.updateGreeting(greeting);
+    }
 }

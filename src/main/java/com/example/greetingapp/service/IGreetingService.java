@@ -12,4 +12,6 @@ public interface IGreetingService {
     Greeting getGreetingByID(Integer id);
 
     List<Greeting> getAllGreetings();
+
+    Greeting updateGreeting(Greeting greeting);
 }
