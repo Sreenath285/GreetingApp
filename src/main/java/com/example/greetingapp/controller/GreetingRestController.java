@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
@@ -50,5 +51,10 @@ public class GreetingRestController {
     @GetMapping("/getGreetingByID")
     public Greeting getGreetingByID(@RequestParam(name = "id") Integer id) {
         return iGreetingService.getGreetingByID(id);
+    }
+
+    @GetMapping("/getAllGreetings")
+    public List<Greeting> getAllGreetings() {
+        return iGreetingService.getAllGreetings();
     }
 }
