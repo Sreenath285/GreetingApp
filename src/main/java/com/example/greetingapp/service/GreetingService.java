@@ -53,4 +53,9 @@ public class GreetingService implements IGreetingService{
         else
             return new Greeting(-1, "Greeting NOT FOUND");
     }
+
+    @Override
+    public void deleteGreeting(Integer id) {
+        greetingRepository.deleteById(id);
+    }
 }
