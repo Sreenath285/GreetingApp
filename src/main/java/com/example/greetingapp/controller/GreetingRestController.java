@@ -21,22 +21,14 @@ public class GreetingRestController {
     @Autowired
     private IGreetingService iGreetingService;
 
-    @Autowired
-    GreetingService greetingService;
-
-    @GetMapping("/greeting")
-    public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-        return new Greeting((int) counter.incrementAndGet(), String.format(template, name));
-    }
-
     @GetMapping("/getMessage")
     public ResponseEntity<String> getMessage() {
-        return new ResponseEntity<String>(greetingService.getMessage(), HttpStatus.OK);
+        return new ResponseEntity<String>(iGreetingService.getMessage(), HttpStatus.OK);
     }
 
     @PostMapping("/postGreeting")
     public ResponseEntity<String> postGreeting(@RequestBody User user) {
-        return new ResponseEntity<String>(greetingService.postGreetingMessage(user), HttpStatus.OK);
+        return new ResponseEntity<String>(iGreetingService.postGreetingMessage(user), HttpStatus.OK);
     }
 
     @GetMapping("/saveGreeting")

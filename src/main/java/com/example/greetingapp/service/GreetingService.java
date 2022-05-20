@@ -18,14 +18,17 @@ public class GreetingService implements IGreetingService{
     @Autowired
     GreetingRepository greetingRepository;
 
+    @Override
     public String getMessage() {
         return "Hello world !!";
     }
 
+    @Override
     public String getGreetingMessage(String fName, String lName) {
         return "Hello " + fName + " " + lName;
     }
 
+    @Override
     public String postGreetingMessage(User user) {
         return "Hello " + user.getFirstName() + " " + user.getLastName();
     }

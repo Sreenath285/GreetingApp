@@ -7,6 +7,12 @@ import java.util.List;
 
 public interface IGreetingService {
 
+    String getMessage();
+
+    String getGreetingMessage(String fName, String lName);
+
+    String postGreetingMessage(User user);
+
     Greeting addGreeting(User user);
 
     Greeting getGreetingByID(Integer id);
