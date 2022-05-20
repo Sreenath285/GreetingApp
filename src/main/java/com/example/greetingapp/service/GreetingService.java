@@ -34,4 +34,9 @@ public class GreetingService implements IGreetingService{
         String greeting = String.format(template, (user.toString().isEmpty()) ? "Hello world" : user.toString());
         return greetingRepository.save(new Greeting((int) counter.incrementAndGet(), greeting));
     }
+
+    @Override
+    public Greeting getGreetingByID(Integer id) {
+        return greetingRepository.findById(id).get();
+    }
 }

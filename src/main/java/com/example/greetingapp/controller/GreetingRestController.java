@@ -38,12 +38,17 @@ public class GreetingRestController {
         return new ResponseEntity<String>(greetingService.postGreetingMessage(user), HttpStatus.OK);
     }
 
-    @GetMapping("/getGreeting")
+    @GetMapping("/saveGreeting")
     public Greeting getGreeting(@RequestParam(value = "firstName", defaultValue = "world") String fName,
                                 @RequestParam(value = "lastName", defaultValue = "") String lName) {
         User user = new User();
         user.setFirstName(fName);
         user.setLastName(lName);
         return iGreetingService.addGreeting(user);
+    }
+
+    @GetMapping("/getGreetingByID")
+    public Greeting getGreetingByID(@RequestParam(name = "id") Integer id) {
+        return iGreetingService.getGreetingByID(id);
     }
 }
