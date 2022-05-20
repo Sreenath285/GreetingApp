@@ -1,15 +1,20 @@
 package com.example.greetingapp.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import javax.persistence.*;
 
 @AllArgsConstructor
-@Setter
-@Getter
+@NoArgsConstructor
+@Data
+@Builder
+@Entity
+@Table(name = "greeting")
 public class Greeting {
 
-    private Long id;
+    @Id
+    @Column(name = "id", nullable = false)
+    private Integer id;
     private String message;
 
 }

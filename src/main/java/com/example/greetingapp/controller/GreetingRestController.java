@@ -3,6 +3,7 @@ package com.example.greetingapp.controller;
 import com.example.greetingapp.model.Greeting;
 import com.example.greetingapp.model.User;
 import com.example.greetingapp.service.GreetingService;
+import com.example.greetingapp.service.IGreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +18,14 @@ public class GreetingRestController {
     private final AtomicLong counter = new AtomicLong();
 
     @Autowired
+    private IGreetingService iGreetingService;
+
+    @Autowired
     GreetingService greetingService;
 
     @GetMapping("/greeting")
     public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-        return new Greeting(counter.incrementAndGet(), String.format(template, name));
+        return new Greeting((int) counter.incrementAndGet(), String.format(template, name));
     }
 
     @GetMapping("/getMessage")
@@ -29,15 +33,17 @@ public class GreetingRestController {
         return new ResponseEntity<String>(greetingService.getMessage(), HttpStatus.OK);
     }
 
-    @GetMapping("/getGreeting")
-    public ResponseEntity<String> getGreeting(@RequestParam(value = "firstName", defaultValue = "world") String fName,
-                                              @RequestParam(value = "lastName", defaultValue = "") String lName) {
-        return new ResponseEntity<String>(greetingService.getGreetingMessage(fName, lName), HttpStatus.OK);
-    }
-
     @PostMapping("/postGreeting")
     public ResponseEntity<String> postGreeting(@RequestBody User user) {
-        return new ResponseEntity<String>(greetingService.postGreetingMessage(user.getFirstName(), user.getLastName()),
-                                          HttpStatus.OK);
+        return new ResponseEntity<String>(greetingService.postGreetingMessage(user), HttpStatus.OK);
+    }
+
+    @GetMapping("/getGreeting")
+    public Greeting getGreeting(@RequestParam(value = "firstName", defaultValue = "world") String fName,
+                                @RequestParam(value = "lastName", defaultValue = "") String lName) {
+        User user = new User();
+        user.setFirstName(fName);
+        user.setLastName(lName);
+        return iGreetingService.addGreeting(user);
     }
 }
